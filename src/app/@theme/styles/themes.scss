@@ -1,0 +1,55 @@
+// @nebular theming framework
+@import '~@nebular/theme/styles/theming';
+// @nebular out of the box themes
+@import '~@nebular/theme/styles/themes';
+@import '../../../../node_modules/carbon-components/scss/globals/scss/_vars.scss';
+
+// which themes you what to enable (empty to enable all)
+$nb-enabled-themes: (default, cosmic);
+
+$nb-themes: nb-register-theme((
+ // app wise variables for each theme
+  color-bg: $ui-02,
+  color-bg-active: $brand-02,
+  sidebar-header-gap: 0rem,
+  sidebar-header-height: initial,
+  layout-content-width: 1400px,
+  color-fg-heading: $text-01,
+  color-fg-text: $text-01,
+  color-fg-highlight: $brand-02,
+  color-primary: $brand-01,
+  link-color: $brand-01,
+  link-color-hover: $brand-02,
+  color-success: $brand-03,
+  font-main: "ibm-plex-sans",
+  font-secondary: "ibm-plex-sans",
+), default, default);
+
+$nb-themes: nb-register-theme((
+  // app wise variables for each theme
+  // color-bg: #20343e,
+  // layout-bg: #20343e,
+  // layout-fg: #20343e,
+  // color-bg-active: #20343e,
+  sidebar-header-gap: 0rem,
+  sidebar-header-height: initial,
+  layout-content-width: 1400px,
+  // color-fg-heading: #ffffff,
+  // color-fg-text: #ffffff,
+  // color-fg: #ffffff,
+  // color-fg-highlight: #7cc7ff,
+  // separator:#20343e,
+  // border-color: #20343e,
+  // color-primary: #5aaafa,
+  // link-color: #5aaafa,
+  // link-color-hover: #5aaafa,
+  // color-success: #5aaafa,
+//  radial-gradient: radial-gradient(circle at 50% 50%, #20343e, #20343e),
+//  linear-gradient: linear-gradient(to right, #20343e, #20343e),
+//  layout-window-mode-bg: #20343e,
+//  layout-window-shadow: 0 8px 20px 0 #20343e,
+//  form-control-focus-bg: #ffffff,
+//  color-dropdown-bg: rgba(255, 255, 255, 0.1),
+  font-main: "ibm-plex-sans",
+  font-secondary: "ibm-plex-sans",
+), cosmic, cosmic);

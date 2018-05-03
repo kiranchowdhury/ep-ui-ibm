@@ -1,0 +1,8 @@
+<form [formGroup]="roleForm" (ngSubmit)="onStart()">
+  <carbon-dropdown [styleOption]="'light'">
+    <carbon-dropdown-option *ngFor="let group of groups" value="group.id"
+      [selected]="group.code === selectedGroupCode">
+      {{group.name}}
+    </carbon-dropdown-option>
+  </carbon-dropdown>
+</form>

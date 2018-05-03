@@ -1,0 +1,9 @@
+.line {
+    position: absolute;
+    top: 0.625rem;
+    right: 100%;
+    height: 1px;
+    width: calc(100% - 24px);
+    border: 1px inset transparent;
+}
+

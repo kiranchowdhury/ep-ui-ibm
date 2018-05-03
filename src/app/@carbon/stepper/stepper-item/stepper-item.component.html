@@ -1,0 +1,7 @@
+<li class="bx--progress-step" [ngClass]="getStepClass()" (click)="onItemClick()">
+    <div class="line" [ngStyle]="{backgroundColor: getLineColor()}"></div>
+  <carbon-stepper-circle [step]="step"></carbon-stepper-circle>
+  <p class="bx--progress-label">{{step.label}}</p>
+  <span class="bx--progress-line" [ngStyle]="{backgroundColor: getLineColor()}"></span>
+  
+</li>

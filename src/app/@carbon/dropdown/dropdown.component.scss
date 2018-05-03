@@ -1,0 +1,19 @@
+ul {
+    padding-left: 0rem; 
+}
+
+a:not([href]):not([tabindex]):hover {
+    color: #ffffff;
+}
+
+.bx--dropdown--light {
+   // @extend .bx--dropdown;
+   // background-color: #152935;
+    border: .5px solid white;
+    color: white;
+    
+}
+.bx--dropdown-list--light {
+  //  @extend .bx--dropdown-list;
+    background-color: #152935;
+}
