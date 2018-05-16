@@ -1,0 +1,24 @@
+<div class="row" *ngIf="!loading" style="background-color: #f0f3f6;">
+  <div class="col-12 col-lg-12 col-md-8 col-md-4">
+      <ep-workspace-header>
+        <ep-saved-criteria [savedCriterias]="savedCriteras"
+          [selectedCriteria]="selectedCriteria" 
+          (criteriaSelectEvent)="handleCriteriaChange($event)"></ep-saved-criteria>
+      </ep-workspace-header>
+  </div>
+</div>
+<div *ngIf="!loading" class="row" style="margin-top:62px;">
+    <div class="col-12 col-lg-12 col-md-8 col-md-4">
+        <ep-workspace-body [selectedSearch]="selectedCriteria"></ep-workspace-body>
+    </div>
+</div>
+
+
+<!-- <ep-workspace-header> -->
+  <!-- ep-saved-criteria input => savedCriteria[], output: criteria change event -->
+  <!-- ep-custom-search input => input => criteria list, input => customization options
+      output => cancle event, Search Event {criteriaconfig: {} }  -->
+<!-- </ep-workspace-header> -->
+<!-- <ep-workspace-body> -->
+
+<!-- </ep-workspace-body> -->

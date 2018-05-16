@@ -1,0 +1,23 @@
+<div *ngIf="loading">
+    <ep-busy-indicator [loadingMsg]="loadingMsg"></ep-busy-indicator>
+</div>
+<nb-card *ngIf="!loading" [size]="'small'">
+    <nb-card-header>
+        <i class="fa fa-lock"></i>Sign In</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="authForm" (ngSubmit)="onLogin()" novalidate>
+            <input id="email" type="text" class="bx--text-input" placeholder="Email" 
+            formControlName="email"/>   <br>
+            <input id="password" type="password" class="bx--text-input" placeholder="Password" 
+            formControlName="password"/> 
+            <br>
+            <carbon-button type="primary" [disabled]="!authForm.valid">Sign In</carbon-button>
+        </form>
+    </nb-card-body>
+    <!-- <nb-card-footer>
+        <carbon-button type="primary" (click)="onLogin()" [disabled]="!authForm.valid">Sign In</carbon-button>
+    </nb-card-footer> -->
+</nb-card>
+
+
+  

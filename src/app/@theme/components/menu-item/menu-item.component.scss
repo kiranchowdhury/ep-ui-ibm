@@ -1,0 +1,23 @@
+.menu-items {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-top: 8px;
+}
+
+.menu-item {
+    display: flex;
+    padding-right: 8px;
+}
+
+.active {
+    background-color: lightgray;
+    font-weight: bolder;
+
+}
+.item {
+    font-family: 'ibm-plex-sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: 300;
+}

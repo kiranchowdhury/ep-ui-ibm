@@ -1,7 +1,11 @@
-<form [formGroup]="roleForm" (ngSubmit)="onStart()">
-  <carbon-dropdown [styleOption]="'light'">
-    <carbon-dropdown-option *ngFor="let group of groups" value="group.id"
-      [selected]="group.code === selectedGroupCode">
+<!-- <div class="row">
+
+</div> -->
+
+<form [formGroup]="roleForm">
+  <carbon-dropdown [styleOption]="'light'" (optionSelected)="onStart($event)">
+    <carbon-dropdown-option *ngFor="let group of groups" [value]="group.id"
+      [selected]="group.id === selectedGroupCode">
       {{group.name}}
     </carbon-dropdown-option>
   </carbon-dropdown>

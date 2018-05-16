@@ -35,9 +35,14 @@ import {
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
+import { MenuComponent } from './components/menu/menu.component';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { SharedModule } from '../@shared/shared.module';
+import { MenuService, EpMenuInternalService } from './components/menu-services/menu.service';
+import { PageHeaderComponent } from './component/page-header/page-header.component';
 // import { RouterModule } from '@angular/router';
 
-const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
+const BASE_MODULES = [SharedModule];
 
 const NB_MODULES = [
   NbCardModule,
@@ -58,6 +63,7 @@ const NB_MODULES = [
 const COMPONENTS = [
   ThemeSwitcherComponent,
   HeaderComponent,
+  PageHeaderComponent,
   FooterComponent,
   SearchInputComponent,
   ThemeSettingsComponent,
@@ -66,6 +72,8 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  MenuComponent,
+  MenuItemComponent
 ];
 
 const PIPES = [
@@ -85,17 +93,18 @@ const NB_THEME_PROVIDERS = [
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
 ];
+const EP_MENU_PROVIDERS = [MenuService, EpMenuInternalService];
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES, ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...NB_THEME_PROVIDERS, EP_MENU_PROVIDERS],
     };
   }
 }

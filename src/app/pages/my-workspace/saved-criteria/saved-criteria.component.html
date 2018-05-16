@@ -1,0 +1,6 @@
+<carbon-dropdown [styleOption]="'inline'" (optionSelected)="onCriteriaSelect($event)">
+  <carbon-dropdown-option *ngFor="let criteria of savedCriterias" 
+      [selected]="criteria.code===selectedCriteria.code" [value]="criteria.code">
+      {{criteria.name}}
+  </carbon-dropdown-option>
+</carbon-dropdown>

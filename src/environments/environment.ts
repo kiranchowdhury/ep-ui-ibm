@@ -9,7 +9,7 @@ export const environment = {
   production: false,
   api_url: '<configure backend api url here>',
   backend: 'cdtdev',
-  base_url: '/',
+  base_url: '',
   versions: {
     app: packageJson.version,
     angular: packageJson.dependencies['@angular/core'],

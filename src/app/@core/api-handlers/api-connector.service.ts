@@ -11,32 +11,40 @@ export class ApiConnectorService {
 
   constructor(private http: HttpClient) { }
 
+ private  getQueryString(params): string {
+    const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+    console.log('QUERY STRING', queryString);
+    return ('?' + queryString);
+  }
+
   private formatErrors(error: any) {
     return new ErrorObservable(error.error);
   }
 
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${environment.api_url}${path}`, { params })
+  get(path: string, payload: Object = {}): Observable<any> {
+
+    return this.http.get(`${environment.base_url}${path}` + this.getQueryString(payload))
       .pipe(catchError(this.formatErrors));
   }
 
   put(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
-      `${environment.api_url}${path}`,
-      JSON.stringify(body)
+      `${environment.base_url}${path}`,
+      body
     ).pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
+  post(path: string, body: Object): Observable<any> {
+    // console.log('API SERVICE BODY', body)
     return this.http.post(
-      `${environment.api_url}${path}`,
-      JSON.stringify(body)
+      `${environment.base_url}${path}`,
+      body
     ).pipe(catchError(this.formatErrors));
   }
 
   delete(path): Observable<any> {
     return this.http.delete(
-      `${environment.api_url}${path}`
+      `${environment.base_url}${path}`
     ).pipe(catchError(this.formatErrors));
   }
 

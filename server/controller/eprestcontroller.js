@@ -7,32 +7,27 @@ var jwt    = require('jsonwebtoken');
 var rootPath = path.normalize(__dirname+'/../../');
 
 exports.doGet = function(req, res) {
-  if(req.jwtPayload) {
-    console.log('Decoded::::', req.jwtPayload);
-  }
   var queryString = req.query;
-  var backendServer = queryString.backendServer && queryString.backendServer.length > 0 ?
-                      queryString.backendServer : 'cdtdevbc';
-
+  var backendServer = req.headers['x-backend-env'];
+  var token = req.jwtPayload;
+  console.log('TOKEN IS', token)
   var apiUrl = config[backendServer].apiUrl;
-  console.log('API URL', apiUrl);
   var certPath = config[backendServer].certPath;
-  console.log('Cert path', certPath);
   var cert = fs.readFileSync(certPath);
-  var id = req.jwtPayload.body.sub; // config[backendServer].id;
-  var pwd = req.jwtPayload.body.permissions; // config[backendServer].pwd;
-  console.log('#########', id+' + '+pwd);
+  var id = token.body.sub; 
+  var pwd = token.body.permissions;
+  console.log('ID AND PWD IS' + id +' & '+pwd);
   console.log("Query String is ", req.query);
 
     superagent.get(apiUrl+'/api/rest/get')
     .auth(id,pwd)
     .cert(cert)
     .query(req.query)
-    .set('Accept', queryString.accept)
-    .set('X-Force-Content-Type', queryString.forceContentType)
-    .set('X-Context-geo', queryString.contextGeo)
-    .set('X-Context-Group', queryString.contectGroup)
-    .set('X-Context-Id', queryString.contextId)
+    .set('Accept', 'application/json')
+    .set('X-Force-Content-Type', 'application/json')
+    .set('X-Context-geo', req.headers['x-context-geo'])
+    .set('X-Context-Group', req.headers['x-context-group'])
+    .set('X-Context-Id', req.headers['x-context-id'])
     .end((err, api_res)=> {
       if(err) {
         console.log("Error from API", api_res.status);
@@ -42,10 +37,6 @@ exports.doGet = function(req, res) {
         res.send(api_res.body);
       }
     });
-
-
-   //res.send(loginResp);
-
 };
 
 exports.doPost = function(req, res) {
@@ -66,24 +57,7 @@ exports.doPost = function(req, res) {
 */
 
 exports.getSavedCriteria = function(req, res) {
-  savedCriteria = [{
-    id: 'MQ',
-    name: 'My Quotes',
-    default: true,
-    editable: false,
-    sequence: 1,
-    fetchCount: 300
-},
-{
-    id: 'EQ',
-    name: 'Expiring Quotes',
-    default: false,
-    editable: true,
-    sequence: 2,
-    fetchCount: 300,
-    searchOnName: 'Expired In',
-    searchOnValue: 5
-}
-]
+  savedCriteria = [
+  ]
   res.send(savedCriteria);
 }

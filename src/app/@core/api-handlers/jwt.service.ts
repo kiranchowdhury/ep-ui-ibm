@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { SessionStorageService } from '../session-storage/session-storage.service';
 
 @Injectable()
 export class JwtService {
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private sessionStorage: SessionStorageService) { }
 
   getToken(): String {
-    return this.localStorageService.getItem('jwtToken');
+    return this.sessionStorage.getItem('jwtToken');
   }
 
   saveToken(token: String): void {
-    this.localStorageService.setItem('jwtToken', token);
+    this.sessionStorage.setItem('jwtToken', token);
   }
 
   removeToken(): void {
-    this.localStorageService.destroyItem('jwtToken');
+    this.sessionStorage.destroyItem('jwtToken');
   }
 
 }

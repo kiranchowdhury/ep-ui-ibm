@@ -17,6 +17,7 @@ export class DropdownOptionComponent {
     constructor() { }
 
     onClick() {
+        console.log('Dropdownoption', this);
         this.onSelect.emit(this);
     }
 

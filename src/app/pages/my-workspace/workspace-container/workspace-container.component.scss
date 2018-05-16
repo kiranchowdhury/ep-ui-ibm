@@ -1,0 +1,20 @@
+@import '../../../@theme/styles/themes.scss';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+@include nb-install-component() {
+    
+        .ws-container {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            .ws-header {
+                height: 129px;
+                // background-color: #f0f3f6;
+            }
+            .ws-body {
+                margin-top: 47px;
+            }
+        
+    }
+}

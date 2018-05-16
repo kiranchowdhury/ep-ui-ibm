@@ -3,10 +3,36 @@
 
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
-// @import '~@nebular/auth/styles/all';
+@import '~@nebular/auth/styles/all';
 
 // $font-path: '../../../../node_modules/carbon-components/src/globals/fonts/';
 // @import '../../../../node_modules/carbon-components/scss/globals/scss/styles.scss';
+
+/** AG GRID CUSTOMIZATION - TO TURN THE DATA TABLE INTO CARBON  DATA TABLE */
+$ag-mat-icons-path: "~ag-grid/src/styles/material-icons/";
+$ag-icons-path: "~ag-grid/src/styles/icons/";
+$font-family: 'ibm-plex-sans', 'Helvetica Neue', Arial, sans-serif;
+$font-size: 14px;
+$font-weight: 300;
+$header-background-color: #f0f3f6;
+$ag-range-selected-color-1: #5596e6;
+$accent-color: #3d70b2;
+$border-color: #f4f7fb;
+// $border-color: #3d70b2;
+$cell-highlight-border: #3d70b2;
+$cell-horizontal-border: #3d70b2;
+$odd-row-background-color: #f0f3f6;
+$secondary-font-family: $font-family;
+$secondary-font-size: 14px;
+$secondary-font-weight: 600;
+$disabled-foreground-color-opacity: 1; 
+
+
+@import '~ag-grid/src/styles/ag-grid';
+@import '~ag-grid/src/styles/ag-theme-material'; 
+// ag-theme-balham;
+
+
 
 $css--font-face: true;
 $font-path: 'https://unpkg.com/carbon-components@8.0.0/src/globals/fonts/';
@@ -21,7 +47,7 @@ $font-path: 'https://unpkg.com/carbon-components@8.0.0/src/globals/fonts/';
 
   // framework global styles
   @include nb-theme-global();
- // @include nb-auth-global();
+  @include nb-auth-global();
 
   // loading progress bar
   @include ngx-pace-theme();

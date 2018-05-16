@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input, OnInit } from '@angular/core';
 import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
@@ -13,6 +13,9 @@ import { StateService } from '../../../@core/data/state.service';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../@models/app-state';
+import { EpMenuItem } from '../../components/menu-services/menu.service';
 
 // TODO: move layouts into the framework
 @Component({
@@ -20,17 +23,18 @@ import 'rxjs/add/operator/delay';
   styleUrls: ['./sample.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
-        <ngx-header [position]="sidebar.id === 'left' ? 'normal': 'inverse'"></ngx-header>
+
+      <nb-layout-header *ngIf="authenticated && authorized" fixed>
+     <!-- <ep-menu [items]="menu"></ep-menu> -->
+
+      <ngx-header [position]="sidebar.id === 'left' ? 'normal': 'inverse'" [menu]="menu"></ngx-header>
       </nb-layout-header>
-
-      <nb-sidebar *ngIf="authorized" class="menu-sidebar"
-                   tag="menu-sidebar"
-                   responsive
-                   [right]="sidebar.id === 'right'">
-
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
+      <!-- <nb-sidebar *ngIf="authenticated && authorized" class="menu-sidebar"
+      tag="menu-sidebar"
+      responsive
+      [right]="sidebar.id === 'right'">
+          <ng-content select="ep-menu"></ng-content>
+      </nb-sidebar> -->
       <nb-layout-column class="main-content">
         <ng-content select="router-outlet"></ng-content>
       </nb-layout-column>
@@ -52,50 +56,13 @@ import 'rxjs/add/operator/delay';
     </nb-layout>
   `,
 })
-export class SampleLayoutComponent  implements OnDestroy {
+export class SampleLayoutComponent  implements OnInit, OnDestroy {
 
   @Input() authorized: boolean;
+  @Input() authenticated: boolean;
+  @Input() menu: EpMenuItem[]
 
   subMenu: NbMenuItem[] = [
-    {
-      title: 'PAGE LEVEL MENU',
-      group: true,
-    },
-    {
-      title: 'Buttons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/buttons',
-    },
-    {
-      title: 'Grid',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/grid',
-    },
-    {
-      title: 'Icons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/icons',
-    },
-    {
-      title: 'Modals',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/modals',
-    },
-    {
-      title: 'Typography',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/typography',
-    },
-    {
-      title: 'Animated Searches',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/search-fields',
-    },
-    {
-      title: 'Tabs',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/tabs',
-    },
   ];
   layout: any = {};
   sidebar: any = {};
@@ -104,7 +71,10 @@ export class SampleLayoutComponent  implements OnDestroy {
   protected sidebarState$: Subscription;
   protected menuClick$: Subscription;
 
-  constructor(protected stateService: StateService,
+
+  constructor(
+              private store: Store<AppState>,
+              protected stateService: StateService,
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
@@ -127,6 +97,10 @@ export class SampleLayoutComponent  implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+  }
+
+  ngOnInit() {
+
   }
 
   ngOnDestroy() {

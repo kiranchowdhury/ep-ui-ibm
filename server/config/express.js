@@ -19,28 +19,25 @@ module.exports = function(app, config) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(express.static(path.join(__dirname, '../../dist')));
-  // app.post('/api/login', restcontroller.login);
   app.post('/api/login', function(req, res) {
     var payload = req.body;
     var backendServer = payload.env;
-    var email = payload.username;
+    var email = payload.email;
     var pwd = payload.password;
     var apiUrl = conf[backendServer].apiUrl;
     var certPath = conf[backendServer].certPath;
-    console.log('Cert path', certPath);
     var cert = fs.readFileSync(certPath);
     superagent.get(apiUrl+'/api/rest/get?apiid=getAuthGroup&methodname=getIBMAuthorizedGroup')
     .auth(email, pwd)
     .cert(cert)
     .end((error, api_resp) => {
-      // console.log('LOGIN STATUS ', api_res.status);
       if(error) {
         res.send({status: "0", message: 'Login Error - Invalid Credential', items: [{isAuthenticated: false}]});
       } else if(api_resp.status === 200){
         var secretKey = conf[backendServer].secret;
 
         var token = generateToken(email, pwd, secretKey);
-        res.send({status: "1", message: 'SUCCESS', token: token, email: email});
+        res.send({token: token});
       } else if(api_resp.status === 401) {
         res.send({status: "0", message: 'HTTP_RESPONSE_CODE_UNAUTHORIZED', items: [{isAuthenticated: false}]});
       } else if(api_resp.status === 400) {
@@ -59,9 +56,9 @@ module.exports = function(app, config) {
       permissions: key
     };
     var jwt = nJwt.create(claims,secretKey);
-    console.log(jwt);
+   // console.log(jwt);
     var token = jwt.compact();
-    console.log(token);
+   // console.log(token);
     return token;
   }
 
@@ -95,9 +92,9 @@ app.use(function(req, res, next){
 
   //set up api routes
   //app.use('/api', api);
+  app.get('/api/get/savedcriteria', restcontroller.getSavedCriteria);
   app.get('/api/get', restcontroller.doGet);
   app.post('/api/post', restcontroller.doPost);
-
 
 
 	// Catch all other routes and return the index file

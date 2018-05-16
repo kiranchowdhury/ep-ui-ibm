@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-2 col-md-2 bx--type-epsilon" style="text-align: center; vertical-align: center">
+       <strong>{{selectedSearch.name}} ({{rowData.length}})</strong>
+    </div>
+    <div class="col-4 col-md-2">
+      <carbon-dropdown>
+        <carbon-dropdown-option [selected]="true">Actions</carbon-dropdown-option>
+        <carbon-dropdown-option>Open</carbon-dropdown-option>
+        <carbon-dropdown-option>Duplicate</carbon-dropdown-option>
+        <carbon-dropdown-option>Delete</carbon-dropdown-option>
+        <carbon-dropdown-option>Replace</carbon-dropdown-option>
+        <carbon-dropdown-option>Lock for view</carbon-dropdown-option>
+        <carbon-dropdown-option>Lock for update</carbon-dropdown-option>
+      </carbon-dropdown>
+    </div>
+</div><br>
+<div class="row">
+  <div class="col-12">
+      <ag-grid-angular style="height: 600px;" class="ag-theme-material"
+
+      [gridOptions]="gridOptions"
+      [columnDefs]="columnDefs"
+      [rowData]="rowData"
+      
+      enableColResize
+      enableSorting
+      enableFilter
+      [defaultColDef]="defaultColDef"
+      [autoGroupColumnDef] = "autoGroupColumnDef"
+      rowSelection="multiple"
+      rowGroupPanelShow="always"
+      
+      (modelUpdated)="onModelUpdated()"
+      (cellClicked)="onCellClicked($event)"
+      (cellDoubleClicked)="onCellDoubleClicked($event)"
+      (cellContextMenu)="onCellContextMenu($event)"
+      (cellValueChanged)="onCellValueChanged($event)"
+      (cellFocused)="onCellFocused($event)"
+      (rowSelected)="onRowSelected($event)"
+      (selectionChanged)="onSelectionChanged()"
+      (beforeFilterChanged)="onBeforeFilterChanged()"
+      (afterFilterChanged)="onAfterFilterChanged()"
+      (filterModified)="onFilterModified()"
+      (beforeSortChanged)="onBeforeSortChanged()"
+      (afterSortChanged)="onAfterSortChanged()"
+      (virtualRowRemoved)="onVirtualRowRemoved($event)"
+      (rowClicked)="onRowClicked($event)"
+      (gridReady)="onReady($event)"
+      
+      (columnEverythingChanged)="onColumnEvent($event)"
+      (columnRowGroupChanged)="onColumnEvent($event)"
+      (columnValueChanged)="onColumnEvent($event)"
+      (columnMoved)="onColumnEvent($event)"
+      (columnVisible)="onColumnEvent($event)"
+      (columnGroupOpened)="onColumnEvent($event)"
+      (columnResized)="onColumnEvent($event)"
+      (columnPinnedCountChanged)="onColumnEvent($event)">
+      </ag-grid-angular>
+  </div>
+</div>

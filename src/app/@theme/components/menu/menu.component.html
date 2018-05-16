@@ -1,0 +1,11 @@
+<div class="menu-items">
+  <ng-container *ngFor="let item of items">
+    <div nbMenuItem *ngIf="!item.hidden"
+        [menuItem]="item"
+        (hoverItem)="onHoverItem($event)"
+        (selectItem)="onSelectItem($event)"
+        (itemClick)="onItemClick($event)"
+        class="menu-item">
+  </div>
+  </ng-container>
+</div>

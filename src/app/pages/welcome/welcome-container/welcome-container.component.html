@@ -1,4 +1,11 @@
-<div class="jumbotron leadspace-bkg" >
+<!-- <div *ngIf="loading">
+    {{loadingMsg}}
+</div> -->
+<!-- <ep-busy-indicator (notifyBusyChange)="handleLoadingChange($event)"></ep-busy-indicator> -->
+<div *ngIf="loading">
+    <ep-busy-indicator [loadingMsg]="loadingMsg"></ep-busy-indicator>
+</div>
+<div *ngIf="!loading && !hideContent"  class="jumbotron leadspace-bkg" >
     <div class="row">
         <div class="col-lg-12">
             <ep-leadspace></ep-leadspace>       
@@ -7,12 +14,13 @@
     <div class="row" style="margin-top:10px">
         <div class="col-lg-6">
             <ep-group-list [groups]="authGroups" 
-            [selectedGroupCode]="selectedGroupCode"></ep-group-list>             
+            [selectedGroupCode]="selectedGroupCode"
+            (selectGroupEvent)="handleGroupSelect($event)"></ep-group-list>             
         </div>
     </div>
     <div class="row" style="margin-top:10px">
         <div class="col-lg-2">
-            <carbon-button type="primary">Start
+            <carbon-button type="primary" (click)="onStartClick()">Start
                 <carbon-icon class="bx--btn__icon" name="launch--glyph"></carbon-icon>
             </carbon-button>
 
@@ -22,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div *ngIf="!loading && !hideContent"  class="row">
     <div class="col">
         <p class="text-heading bx--type-delta">ePricer is a real time, self-service pricing tool available to sales reps and business partners.</p>
         <p class="text-heading bx--type-gamma">It provides a method to price quote at list price or below and supports price request approval. The goal is to provide timely responses to customer price requests.</p>

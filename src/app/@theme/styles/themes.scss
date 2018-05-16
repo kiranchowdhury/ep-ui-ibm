@@ -4,12 +4,17 @@
 @import '~@nebular/theme/styles/themes';
 @import '../../../../node_modules/carbon-components/scss/globals/scss/_vars.scss';
 
+
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic);
 
 $nb-themes: nb-register-theme((
  // app wise variables for each theme
-  color-bg: $ui-02,
+  header-height: 10.8rem,
+  header-font-size:.85rem,
+  header-line-height:1.25,
+  color-bg: #ffffff, //$ui-02,
+  layout-bg: #ffffff, // #f0f3f6,
   color-bg-active: $brand-02,
   sidebar-header-gap: 0rem,
   sidebar-header-height: initial,
@@ -23,6 +28,8 @@ $nb-themes: nb-register-theme((
   color-success: $brand-03,
   font-main: "ibm-plex-sans",
   font-secondary: "ibm-plex-sans",
+  // ag-grid font customization
+
 ), default, default);
 
 $nb-themes: nb-register-theme((

@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
+import { EpMenuItem } from '../menu-services/menu.service';
 
 @Component({
   selector: 'ngx-header',
@@ -13,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
 
   @Input() position = 'normal';
+  @Input() menu: EpMenuItem[];
 
   user: any;
 

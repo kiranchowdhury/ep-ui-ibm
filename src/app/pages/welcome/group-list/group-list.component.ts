@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Group } from '../../../@core/auth/auth.state';
 
@@ -10,6 +10,7 @@ import { Group } from '../../../@core/auth/auth.state';
 export class GroupListComponent implements OnInit {
   @Input() groups: Group[];
   @Input()selectedGroupCode: string;
+  @Output() selectGroupEvent: EventEmitter<{value: string, text: string}> =  new EventEmitter();
   roleForm: FormGroup;
 
  // groups: FormControl;
@@ -21,8 +22,8 @@ export class GroupListComponent implements OnInit {
     });
   }
 
-  onStart() {
-
+  onStart(option) {
+    this.selectGroupEvent.emit(option);
   }
 
 }

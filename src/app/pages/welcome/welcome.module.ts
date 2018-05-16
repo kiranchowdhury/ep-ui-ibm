@@ -5,13 +5,11 @@ import { LeadspaceComponent } from './leadspace/leadspace.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarbonComponentsModule } from '../../@carbon/carbon-components.module';
 import { GroupListComponent } from './group-list/group-list.component';
+import { SharedModule } from '../../@shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CarbonComponentsModule,
+    SharedModule
   ],
   declarations: [WelcomeContainerComponent, LeadspaceComponent, GroupListComponent]
 })

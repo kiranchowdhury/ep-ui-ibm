@@ -17,7 +17,7 @@ export class DropdownComponent implements AfterContentInit {
     @Input() styleOption: string;
     @Input() name: string;
     @Input() default: string;
-    @Output() optionSelected: EventEmitter<string> = new EventEmitter();
+    @Output() optionSelected: EventEmitter<{value: string, text: string}> = new EventEmitter();
     @ContentChildren(DropdownOptionComponent) options: QueryList<DropdownOptionComponent>;
 
     menuVisible = false;
@@ -39,8 +39,15 @@ export class DropdownComponent implements AfterContentInit {
                 border: '.5px solid white',
                 color: 'white'
             }
+        } else if (this.styleOption === 'inline') {
+            return {
+                backgroundColor: 'transparent',
+                border: 'none',
+            }
         }
     }
+
+
 
     getDropDownListStyle() {
         if (this.styleOption === 'light') {
@@ -57,13 +64,17 @@ export class DropdownComponent implements AfterContentInit {
                 this.selectOption(option);
                 this.selectedText = option.text;
                 this.value = option.value;
+                this.optionSelected.emit({value: this.value, text: this.selectedText})
             }
 
             option.onSelect.subscribe(dropdownOption => {
                 this.selectOption(dropdownOption);
                 this.value = dropdownOption.value;
                 this.selectedText = dropdownOption.text;
-                this.optionSelected.emit(dropdownOption.value);
+              //  console.log('Selected Test', this.selectedText);
+              //  console.log('Selected Value', this.value);
+                // this.optionSelected.emit(dropdownOption.value);
+                this.optionSelected.emit({value: this.value, text: this.selectedText})
                 this.toggleMenu(false);
             });
         });

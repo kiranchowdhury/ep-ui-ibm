@@ -7,6 +7,13 @@
   justify-content: space-between;
   width: 100%;
 
+  .active {
+
+    border-bottom: 3.5px solid #152934;
+ //   background-color: #dfe3e6;
+ //   font-weight: 600;
+  }
+
   .left {
     display: flex;
     width: 100%;
@@ -21,14 +28,10 @@
   .logo-containter {
     display: flex;
     align-items: center;
-    cursor: pointer;
   }
 
   .control-item {
     display: block;
-  }
-  .email-text {
-    height: auto;
   }
 
   .header-container {
@@ -49,10 +52,12 @@
 
     .logo {
       padding: 0 nb-theme(padding);
-      font-size: 1 rem;
+      font-size: 1.75rem;
       font-weight: nb-theme(font-weight-bolder);
       border-left: 1px solid nb-theme(separator);
       white-space: nowrap;
+
+
 
       span {
         font-weight: nb-theme(font-weight-normal);
@@ -116,4 +121,3 @@
     }
   }
 }
-

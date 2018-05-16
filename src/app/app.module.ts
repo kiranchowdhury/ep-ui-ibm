@@ -7,7 +7,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
+import { HttpTokenInterceptor } from './@core/api-handlers/http.token.interceptor';
 
 
 
@@ -28,20 +29,11 @@ import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    CoreModule.forRoot(),
-    NbAuthModule.forRoot({
-      providers: {
-        email: {
-          service: NbEmailPassAuthProvider,
-          config: {
-          },
-        },
-      },
-      forms: {},
-    }),
+    CoreModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })

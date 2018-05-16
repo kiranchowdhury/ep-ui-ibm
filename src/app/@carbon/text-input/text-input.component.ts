@@ -8,7 +8,8 @@ let uniqueId = 0;
     template: `
     <div class="bx--form-item">
       <label for="text-input{{_id}}" class="bx--label" [ngClass]="{'bx--label--disabled': disabled}">{{ label }}</label>
-      <input id="text-input{{_id}}" type="text" class="bx--text-input" [value]="value" [placeholder]="placeholder"
+      <input id="text-input{{_id}}" [type]="type" class="bx--text-input" [value]="value" [placeholder]="placeholder"
+        [formControlName]="formControlName"
         attr.name="{{name}}" (change)="textChanged($event.target.value)" [disabled]="disabled"/>
     </div>
     `
@@ -20,6 +21,8 @@ export class TextInputComponent implements OnInit {
     @Input() name = '';
     @Input() value = '';
     @Input() placeholder = '';
+    @Input() type = ''
+    @Input() formControlName = '';
 
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
